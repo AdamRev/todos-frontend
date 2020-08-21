@@ -17,9 +17,15 @@ cp dist/todos-frontend/* /deploy'''
     }
 
     stage('Deploy to S3') {
-      agent any
+      agent {
+        docker {
+          image 'amazon/aws-cli'
+          args '--mount type=bind,source=/home/ec2-user/deploy,target=/deploy --interactive --entrypoint=""'
+        }
+
+      }
       steps {
-        sh 'aws s3 cp /home/ec2-user/deploy s3://todosfrontendunique11 --recursive --acl public-read'
+        sh 'aws s3 cp /deploy s3://todosfrontendunique11 --recursive --acl public-read'
       }
     }
 
