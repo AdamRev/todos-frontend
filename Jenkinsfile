@@ -16,5 +16,12 @@ cp dist/todos-frontend/* /deploy'''
       }
     }
 
+    stage('Deploy to S3') {
+      agent any
+      steps {
+        sh 'aws s3 cp /home/ec2-user/deploy s3://todosfrontendunique11 --recursive --acl public-read'
+      }
+    }
+
   }
 }
