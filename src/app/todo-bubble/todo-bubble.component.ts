@@ -6,7 +6,7 @@ import Item from '../Item';
   templateUrl: './todo-bubble.component.html',
   styles: [
     `.bubble {
-      border: 3px solid green;
+      border: 3px solid blue;
       border-radius: 25px;
     }`
   ]
