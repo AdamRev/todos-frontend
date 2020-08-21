@@ -22,7 +22,11 @@ cp dist/todos-frontend/* /deploy'''
           image 'amazon/aws-cli'
           args '--mount type=bind,source=/home/ec2-user/deploy,target=/deploy --interactive --entrypoint=""'
         }
-
+      }
+      when {
+        expression {
+          env.BRANCH_NAME == 'master'
+        }
       }
       steps {
         sh 'aws s3 cp /deploy s3://todosfrontendunique11 --recursive --acl public-read'
